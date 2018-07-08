@@ -3,8 +3,8 @@
  */
 
 var canvas = document.getElementById("canvas");
-var dx = Math.random()* 0.5;
-var dy = Math.random()*0.5;
+// var dx = Math.random()* 0.5;
+// var dy = Math.random()*0.5;
 var fps = 60;
 var canwidth = window.innerWidth*.99;
 var canheight = window.innerHeight*0.99;
