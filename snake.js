@@ -1,11 +1,10 @@
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+
 const food = (x,y,width,height) => {
-	this.x = x;
-	this.y = y;
-	this.width = width;
-	this.height = height;
+	this.position = [x,y];
+	this.size = [width,height];
 
 
 
@@ -16,16 +15,19 @@ const food = (x,y,width,height) => {
 
 }
 const snake = (x,y,dx,dy,width,height) => {
-	this.x = x;
-	this.y = y;
-	this.dx = dx;
-	this.dy = dy;
-	this.width = width;
-	this.height = height;
+	this.position = [x,y];
+	this.speed = [dx,dy];
+	this.size = [width, height];
 
 
-	this.eat = () => {
-//This is a test
+	
 
-	}
 }
+
+animate = () => {
+	console.log("animation is working!");
+	requestAnimationFrame(animate);
+}
+
+
+animate();
