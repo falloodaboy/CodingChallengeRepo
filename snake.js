@@ -25,7 +25,7 @@ const snake = (x,y,dx,dy,width,height) => {
 
 
 	this.eat = () => {
-
+//This is a test
 
 	}
 }
