@@ -23,11 +23,12 @@ const snake = (x,y,dx,dy,width,height) => {
 	
 
 }
-
+init = () => {
+	
+}
 animate = () => {
-	console.log("animation is working!");
 	requestAnimationFrame(animate);
 }
 
-
+init();
 animate();
