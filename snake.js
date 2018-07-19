@@ -151,7 +151,7 @@ function clearCanvas(){
 		 	}
 		 
 		 	paintFood(food.x, food.y);
-			console.log(food.x, food.y);
+			//console.log(food.x, food.y);
  		
  	} 				
  }
