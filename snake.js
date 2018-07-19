@@ -1,83 +1,202 @@
 
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
+/**
+Things To do:
+1. make the snake head. 	-done
+2. make the food.			-done
+3. update the snake.		-done
+4. update the food.			-done
+5. get Score				-
+6. stop Sequence			-done
+7. restart Sequence			-
+8. Boundaries				-
 
-//return the distance between any two points on the canvas using the pythagorean theorem.
-const dist = (x,y,x2,y2) => {
-	xDistance = x - x2; 
-	yDistance = y - y2;
 
-	return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+
+**/
+
+
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+canvas.width = 300;
+canvas.height = 400;
+var snake;
+var food;
+var direction = "";
+var btn = document.getElementById('remove');
+var	btn2 = document.getElementById("start");
+
+var paintFood = function(x,y){
+	var width = 10;
+	var height = 10;
+	ctx.fillStyle = "yellow";
+	ctx.fillRect(x*10,y*10,10,10);	
+	
+		
+}
+var addSnake = function(){
+	snake = [];
+	var length = 4;
+	for(var i= 0; i < length; i++){
+		snake.push({x:i, y:0});
+	}
+		
+}
+var drawSnake = function(x,y){
+	
+	
+	ctx.strokeStyle = "black";
+	ctx.strokeRect(x*10,y*10,10,10)
+	ctx.fillStyle = "cyan";
+	ctx.fillRect(x*10,y*10,10,10)
 }
 
-/**------------------------------FOOD OBJECT CONSTRUCTOR---------------------**/
-const food = (x,y,width,height) => {
-	this.x = x;
-	this.y = y;
-	this.width = width;
-	this.height = height;
-
-
-	//generate the food for the snake.
-	this.generate = () => {
-		ctx.beginPath();
-		ctx.fillStyle = "yellow";
-		ctx.fillRect(this.x,this.y,this.width,this.height);
-		ctx.closePath();
-
-	}
-	//check if the snake has eaten the food. If it has, generate a new food object.
-	this.hasSnakeCollided = (snakeX,snakeY) => {
-
-		this.snakeX = snakeX;
-		this.snakeY = snakeY;
-
-		if(dist(this.snakeX,this.snakeY,this.x,this.y) !== 0){
-			return false;
-
-		}
-			this.generate();
+var checkFood = function(){
 		
+	food = {
+		x: Math.floor((Math.random() * 30) + 1),
+		y: Math.floor((Math.random() * 30) + 1)
+	};
+	for(var i = 0; i < snake.length; i++){
+		var snakeX = snake[i].x;
+		var snakeY = snake[i].y;
+		if(food.x === snakeX && food.y == snakeY || food.y == snakeY && food.x == snakeX){
+			food.x = Math.floor((Math.random() * 30) + 1);
+			food.y = Math.floor((Math.random() * 30) + 1);
+			console.log("food was rerendered");
 		}
-
-	}
-
-
-
-
-
-
-/**-----------------------------------SNAKE OBJECT CONSTRUCTOR-----------------------------**/
-const snake = (x,y,dx,dy,width,height) => {
-	this.x = x;
-	this.y = y;
-	this.width = width;
-	this.height = height;
-	this.dx = dx;
-	this.dy = dy;
-
-	this.draw = () => {
-			ctx.beginPath();
-			ctx.fillStyle = 'green';
-			ctx.fillRect(this.x,this.y,this.width,this.height);
-			ctx.closePath();
 	}
 	
-	this.update = () => {
-		//Logic for snake's behavior and Boundaries go here.
-		this.draw();
+
+
+}
+document.onkeydown = function(event){
+
+	keyCode = window.event.keyCode;
+	keyCode = event.keyCode;
+
+	switch(keyCode){
+		case 87:
+			if(direction !== "down"){
+				direction = 'up';
+			}
+			
+		
+		break;
+		case 83: 
+			if(direction !== "up"){
+			direction = "down";
+		}
+		break;
+		case 68:
+		if(direction !== "left"){
+			direction = "right";
+		}
+		break;
+		case 65:
+		if(direction !== "right"){
+			direction = "left";
+		}
+		break;
 	}
-
-}
-init = () => {
-	//initialize the objects from the constructors above.
-	canvas.height = 400;
-	canvas.width = 300;
-}
-animate = () => {
-	 //add some behavior if you want :)
-	requestAnimationFrame(animate);
 }
 
-init();
-animate();
+function clearCanvas(){
+
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+	ctx.fillStyle = "black";
+	ctx.fillRect(0,0,300,400);
+}
+ var runner = function(){
+ 	clearCanvas();
+ 	
+ 	var snakeX = snake[0].x;
+ 	var snakeY = snake[0].y;
+ 	
+ 	if(direction == "up"){
+ 		if(snakeY >= -1) snakeY--;
+ 	}
+ 	else if(direction == "down"){
+ 		if(snakeY <= 39) snakeY++;
+ 	}
+ 	else if(direction == "right"){
+ 		if(snakeX <= 29) snakeX++;
+ 	}
+ 	else if(direction == "left"){
+ 		if(snakeX >= -1) snakeX--;
+ 	}
+	//console.log(checkSnakeCollision(snakeX,snakeY,snake));
+ 	if(snakeY < 0 || snakeY > 38 || snakeX  < 0 || snakeX > 28 || checkSnakeCollision(snakeX,snakeY,snake)){
+ 				
+ 				stopGame();
+ 				btn2.disabled =false;
+ 		}
+ 	else{
+		 	if(snakeX == food.x && snakeY == food.y || snakeY == food.y && snakeX == food.x){
+		 		console.log("food was eaten");
+		 		var tail = {x:snakeX, y:snakeY};
+		 		checkFood();
+		 	}
+		 	else{
+		 		var tail = snake.pop();
+		 		tail.x = snakeX;
+		 		tail.y = snakeY;
+		 	}
+		 		snake.unshift(tail);
+				
+			for(var i=0; i< snake.length; i++){
+		 		drawSnake(snake[i].x, snake[i].y);
+		 	}
+		 	//console.log(snakeX, snakeY);
+		 	paintFood(food.x, food.y);
+		 //	console.log(snakeX,snakeY);
+ 		
+ 	} 				
+ }
+var checkSnakeCollision = function(x,y,array) {
+		
+	for(var i=0; i < array.length; i++ ){
+		if(array[i].x === x  && array[i].y === y){
+			
+			return true;
+			
+		}
+		
+	}
+		return false;
+	
+}
+var looper;
+ function init(){
+	direction = "down";
+	
+ 	addSnake();
+ 	checkFood();
+ 	looper = setInterval(animate, 60);
+
+ 	
+ }
+ function stopGame(){
+ 	clearCanvas();
+ 	looper = clearInterval(looper);
+ 	
+ }
+function animate(){
+
+	runner();
+	//console.log("running");
+}
+
+btn2.onclick = function(){
+	
+			btn2.disabled = true;
+		
+	
+		init();
+}
+
+
+btn.onclick = function(){
+   		//console.log("button was clicked");
+   		stopGame();
+   		btn2.disabled = false;
+   }
