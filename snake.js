@@ -125,7 +125,7 @@ function clearCanvas(){
  		if(snakeX >= -1) snakeX--;
  	}
 	
- 	if(snakeY < 0 || snakeY > 38 || snakeX  < 0 || snakeX > 28 || checkSnakeCollision(snakeX,snakeY,snake)){
+ 	if(snakeY < 0 || snakeY > 38 || snakeX  < 0 || snakeX > 29 || checkSnakeCollision(snakeX,snakeY,snake)){
  				
  				stopGame();
  				btn2.disabled =false;
