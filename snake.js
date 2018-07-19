@@ -108,7 +108,7 @@ function clearCanvas(){
 }
  var runner = function(){
  	clearCanvas();
- 	
+ 	var tail2 = {x: snakeX + 10, y:snakeY + 10};
  	var snakeX = snake[0].x;
  	var snakeY = snake[0].y;
  	
@@ -134,6 +134,9 @@ function clearCanvas(){
 		 	if(snakeX == food.x && snakeY == food.y || snakeY == food.y && snakeX == food.x){
 		 		console.log("food was eaten");
 		 		var tail = {x:snakeX, y:snakeY};
+		 		
+		 		snake.push(tail2);
+		 		console.log(snake.length);
 		 		checkFood();
 		 	}
 		 	else{
