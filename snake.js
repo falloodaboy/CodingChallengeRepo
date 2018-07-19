@@ -53,15 +53,15 @@ var drawSnake = function(x,y){
 var checkFood = function(){
 		
 	food = {
-		x: Math.floor((Math.random() * 30) + 1),
-		y: Math.floor((Math.random() * 30) + 1)
+		x: Math.floor((Math.random() * 29) + 1),
+		y: Math.floor((Math.random() * 29) + 1)
 	};
 	for(var i = 0; i < snake.length; i++){
 		var snakeX = snake[i].x;
 		var snakeY = snake[i].y;
 		if(food.x === snakeX && food.y == snakeY || food.y == snakeY && food.x == snakeX){
-			food.x = Math.floor((Math.random() * 30) + 1);
-			food.y = Math.floor((Math.random() * 30) + 1);
+			food.x = Math.floor((Math.random() * 29) + 1);
+			food.y = Math.floor((Math.random() * 29) + 1);
 			console.log("food was rerendered");
 		}
 	}
@@ -151,7 +151,7 @@ function clearCanvas(){
 		 	}
 		 
 		 	paintFood(food.x, food.y);
-		
+			console.log(food.x, food.y);
  		
  	} 				
  }
