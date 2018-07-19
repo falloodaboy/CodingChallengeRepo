@@ -7,8 +7,8 @@ Things To do:
 4. update the food.			-done
 5. get Score				-
 6. stop Sequence			-done
-7. restart Sequence			-
-8. Boundaries				-
+7. restart Sequence			-done
+8. Boundaries				-done
 
 
 
@@ -124,7 +124,7 @@ function clearCanvas(){
  	else if(direction == "left"){
  		if(snakeX >= -1) snakeX--;
  	}
-	//console.log(checkSnakeCollision(snakeX,snakeY,snake));
+	
  	if(snakeY < 0 || snakeY > 38 || snakeX  < 0 || snakeX > 28 || checkSnakeCollision(snakeX,snakeY,snake)){
  				
  				stopGame();
@@ -146,9 +146,9 @@ function clearCanvas(){
 			for(var i=0; i< snake.length; i++){
 		 		drawSnake(snake[i].x, snake[i].y);
 		 	}
-		 	//console.log(snakeX, snakeY);
+		 
 		 	paintFood(food.x, food.y);
-		 //	console.log(snakeX,snakeY);
+		
  		
  	} 				
  }
@@ -196,7 +196,7 @@ btn2.onclick = function(){
 
 
 btn.onclick = function(){
-   		//console.log("button was clicked");
+   		
    		stopGame();
    		btn2.disabled = false;
    }
