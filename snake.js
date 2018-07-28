@@ -21,15 +21,15 @@ const xyRand = () => {
 }
 
 const scoreCheck = () => {
-	let currentScore = scoreCount.innerHTML.match(/\d+/); //ex 0 or [0, 1]
-	let currentHighScore = highScore.innerHTML.match(/\d+/);
+	let currentScore = scoreCount.textContent.match(/\d+/); //ex 0 or [1, 4]
+	let currentHighScore = highScore.textContent.match(/\d+/);
 	console.log(currentScore, currentHighScore);
 	if(currentScore instanceof Array || currentHighScore instanceof Array) {
 		currentScore = parseInt(currentScore.join(""));
 		currentHighScore = parseInt(currentHighScore.join(""));
 	}
 	if(currentScore > currentHighScore) {
-		highScore.innerHTML = `High Score: ${score}`;
+		highScore.textContent = `High Score: ${score}`;
 		console.log('New high score');
 	}
 	console.log(currentScore, currentHighScore);
@@ -168,8 +168,8 @@ const animate = () => {
 
 	firstSnake.update();
 
-	scoreCount.innerHTML = `Score: ${score}`;
-	// highScore.innerHTML = `High Score: 0`;
+	scoreCount.textContent = `Score: ${score}`;
+	// highScore.textContent = `High Score: 0`;
 
 	// console.log(`snake length: ${firstSnake.snakeBody.length}`);
 	// console.log(firstSnake.snakeBody);
