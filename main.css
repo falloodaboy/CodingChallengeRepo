@@ -1,0 +1,37 @@
+/* broswer reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* css variables */
+  --canvas-bg-color: black;
+  --gameFrame-color: #666;
+}
+
+.wrapper {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameFrame {
+  height: 80vh;
+  /* width: 50vw; */
+  background: var(--gameFrame-color);
+  border: 25px solid var(--gameFrame-color);
+  border-radius: 25px;
+}
+
+#canvas {
+  /* width: 400px; */
+  /* height: 400px; */
+  background: var(--canvas-bg-color);
+  box-sizing: content-box;
+  border: 5px solid #111111;
+  border-radius: 15px 15px 0 0;
+}
